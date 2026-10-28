@@ -21,7 +21,10 @@
 
 #define BUS_HZ      400000u
 
-enum phase { WRITING, READING };
+/* RESTARTING: the write part is done and a repeated START is requested.
+ * BTF stays set until the START goes out, re-entering the interrupt: until
+ * SB, nothing is to be done. */
+enum phase { WRITING, RESTARTING, READING };
 
 static struct {
     uint8_t addr;
@@ -129,21 +132,30 @@ static uint8_t tx_next(void)
     return x.seg[x.seg_i][x.seg_pos++];
 }
 
+/* ADDR clears on a read of SR1 then SR2. SR1 is read again right before:
+ * the CR1 writes that must come first (the NACK, POS) may come between,
+ * and some implementations take a CR1 write as breaking the sequence. */
+static void clear_addr(void)
+{
+    (void)I2C1->SR1;
+    (void)I2C1->SR2;
+}
+
 /* After the address is acknowledged in read mode, set up the ending */
 static void read_started(void)
 {
     if (x.rx_len == 1) {
         I2C1->CR1 &= ~I2C_CR1_ACK;
-        (void)I2C1->SR2;
+        clear_addr();
         I2C1->CR1 |= I2C_CR1_STOP;
         I2C1->CR2 |= I2C_CR2_ITBUFEN;
     } else if (x.rx_len == 2) {
         I2C1->CR1 = (I2C1->CR1 & ~I2C_CR1_ACK) | I2C_CR1_POS;
-        (void)I2C1->SR2;
+        clear_addr();
         I2C1->CR2 &= ~I2C_CR2_ITBUFEN;
     } else {
         I2C1->CR1 |= I2C_CR1_ACK;
-        (void)I2C1->SR2;
+        clear_addr();
         if (x.rx_len == 3)
             I2C1->CR2 &= ~I2C_CR2_ITBUFEN;
         else
@@ -157,19 +169,23 @@ void I2C1_EV_IRQHandler(void)
     uint32_t sr1 = I2C1->SR1;
 
     if (sr1 & I2C_SR1_SB) {
+        if (x.phase == RESTARTING)
+            x.phase = READING;
         I2C1->DR = (uint8_t)(x.addr << 1) | (x.phase == READING);
         return;
     }
+    if (x.phase == RESTARTING)
+        return;
 
     if (sr1 & I2C_SR1_ADDR) {
         if (x.phase == READING) {
             read_started();
         } else {
-            (void)I2C1->SR2;
+            clear_addr();
             if (tx_left()) {
                 I2C1->CR2 |= I2C_CR2_ITBUFEN;
             } else if (x.rx_len) {
-                x.phase = READING;
+                x.phase = RESTARTING;
                 I2C1->CR1 |= I2C_CR1_START;
             } else {
                 I2C1->CR1 |= I2C_CR1_STOP;      /* a probe */
@@ -186,7 +202,7 @@ void I2C1_EV_IRQHandler(void)
                 I2C1->CR2 &= ~I2C_CR2_ITBUFEN;  /* wait for BTF */
         } else if (sr1 & I2C_SR1_BTF) {
             if (x.rx_len) {
-                x.phase = READING;
+                x.phase = RESTARTING;
                 I2C1->CR1 |= I2C_CR1_START;
             } else {
                 I2C1->CR1 |= I2C_CR1_STOP;

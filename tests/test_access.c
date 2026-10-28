@@ -246,6 +246,7 @@ int main(void)
     access_card(&a, &ALAN, now);
     CHECK(!hw.open);
     CHECK_INT(a.state, ACCESS_ALARM);
+    CHECK_INT(hw.last_log, LOG_DENIED_ALARM);
     /* An admin's wrong PIN keeps the alarm */
     access_card(&a, &ADA, now);
     type(&a, "0000#");

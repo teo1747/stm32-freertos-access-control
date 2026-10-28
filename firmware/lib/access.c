@@ -201,6 +201,7 @@ void access_card(struct access *a, const struct card_uid *uid, uint32_t now)
         return;
     }
     if (a->alarm != ALARM_NONE && !(u.flags & USER_ADMIN)) {
+        log_event(a, LOG_DENIED_ALARM, slot, uid);
         deny(a, "Alarm: admin only", now);
         return;
     }

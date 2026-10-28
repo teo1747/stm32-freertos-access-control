@@ -33,6 +33,7 @@ enum log_event {
     LOG_ADMIN_LOGIN,
     LOG_ADMIN_FAILED,
     LOG_TIME_SET,
+    LOG_DENIED_ALARM,           /* new events go last: stored records keep their meaning */
     LOG_EVENT_COUNT
 };
 

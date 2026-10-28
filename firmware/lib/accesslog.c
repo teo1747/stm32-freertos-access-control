@@ -109,6 +109,7 @@ const char *log_event_name(unsigned event)
         [LOG_ADMIN_LOGIN] = "admin login",
         [LOG_ADMIN_FAILED] = "admin login failed",
         [LOG_TIME_SET] = "time set",
+        [LOG_DENIED_ALARM] = "denied: alarm active",
     };
     return event < LOG_EVENT_COUNT && names[event] ? names[event] : "?";
 }

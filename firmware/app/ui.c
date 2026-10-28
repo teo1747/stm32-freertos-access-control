@@ -4,6 +4,7 @@
 #include "console.h"
 #include "i2c.h"
 #include "ssd1306.h"
+#include "supervisor.h"
 #include "FreeRTOS.h"
 #include "task.h"
 
@@ -52,6 +53,7 @@ static void ui_task(void *arg)
 
     for (;;) {
         ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(REFRESH_MS));
+        supervisor_checkin(CHECKIN_UI);
         clock_poll();
 
         struct screen s;

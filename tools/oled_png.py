@@ -6,7 +6,7 @@ reports (--json), whose SSD1306 output `pixels` is an SVG path of the lit
 pixels. Output: one PNG per screen, or a contact sheet of all of them.
 
     tools/oled_png.py build/host/tests/screen-*.pbm --sheet docs/images/screens.png
-    tools/oled_png.py --embsim report.json --component OLED -o docs/images/live.png
+    tools/oled_png.py --embsim idle.json --embsim granted.json --sheet docs/images/screens.png
 
 Standard library only.
 """
@@ -96,7 +96,7 @@ def write_png(path, rows):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("pbm", nargs="*", help="PBM screens")
-    ap.add_argument("--embsim", help="an `embsim run --json` report")
+    ap.add_argument("--embsim", action="append", default=[], help="an `embsim run --json` report (repeatable)")
     ap.add_argument("--component", default="OLED", help="the SSD1306's id in the project")
     ap.add_argument("-o", "--out-dir", default=".", help="where the PNGs go (one per input)")
     ap.add_argument("--sheet", help="one contact sheet of every input instead")
@@ -106,10 +106,10 @@ def main():
     screens = []
     for p in args.pbm:
         screens.append((Path(p).stem, read_pbm(p)))
-    if args.embsim:
-        report = json.loads(Path(args.embsim).read_text())
+    for path in args.embsim:
+        report = json.loads(Path(path).read_text())
         outputs = report["snapshot"]["outputs"][args.component]
-        screens.append((args.component.lower(), from_svg_path(outputs.get("pixels", ""))))
+        screens.append((Path(path).stem, from_svg_path(outputs.get("pixels", ""))))
     if not screens:
         ap.error("nothing to draw")
 

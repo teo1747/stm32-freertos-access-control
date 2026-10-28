@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 1016" width="980" height="1016" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13">
+<rect width="980" height="1016" rx="14" fill="#ffffff"/>
+<text x="40" y="44" font-size="20" font-weight="bold" fill="#212529">Wiring: NUCLEO-F446RE access terminal</text>
+<rect x="40" y="70" width="300" height="686" rx="10" fill="#f1f3f5" stroke="#343a40" stroke-width="2"/>
+<text x="56" y="100" font-size="16" font-weight="bold" fill="#212529">NUCLEO-F446RE</text>
+<text x="56" y="118" fill="#495057">STM32F446RE, 180 MHz, FreeRTOS</text>
+<circle cx="340" cy="150" r="5" fill="#e8590c"/>
+<text x="56" y="154" font-weight="bold" fill="#212529">D3</text>
+<text x="130" y="154" fill="#495057">PB3</text>
+<text x="328" y="154" text-anchor="end" fill="#e8590c">SPI1_SCK</text>
+<circle cx="340" cy="186" r="5" fill="#e8590c"/>
+<text x="56" y="190" font-weight="bold" fill="#212529">D5</text>
+<text x="130" y="190" fill="#495057">PB4</text>
+<text x="328" y="190" text-anchor="end" fill="#e8590c">SPI1_MISO</text>
+<circle cx="340" cy="222" r="5" fill="#e8590c"/>
+<text x="56" y="226" font-weight="bold" fill="#212529">D4</text>
+<text x="130" y="226" fill="#495057">PB5</text>
+<text x="328" y="226" text-anchor="end" fill="#e8590c">SPI1_MOSI</text>
+<circle cx="340" cy="258" r="5" fill="#e8590c"/>
+<text x="56" y="262" font-weight="bold" fill="#212529">D10</text>
+<text x="130" y="262" fill="#495057">PB6</text>
+<text x="328" y="262" text-anchor="end" fill="#e8590c">CS</text>
+<circle cx="340" cy="294" r="5" fill="#e8590c"/>
+<text x="56" y="298" font-weight="bold" fill="#212529">D7</text>
+<text x="130" y="298" fill="#495057">PA8</text>
+<text x="328" y="298" text-anchor="end" fill="#e8590c">RST</text>
+<circle cx="340" cy="330" r="5" fill="#1c7ed6"/>
+<text x="56" y="334" font-weight="bold" fill="#212529">D15</text>
+<text x="130" y="334" fill="#495057">PB8</text>
+<text x="328" y="334" text-anchor="end" fill="#1c7ed6">I2C1_SCL</text>
+<circle cx="340" cy="366" r="5" fill="#1c7ed6"/>
+<text x="56" y="370" font-weight="bold" fill="#212529">D14</text>
+<text x="130" y="370" fill="#495057">PB9</text>
+<text x="328" y="370" text-anchor="end" fill="#1c7ed6">I2C1_SDA</text>
+<circle cx="340" cy="402" r="5" fill="#9c36b5"/>
+<text x="56" y="406" font-weight="bold" fill="#212529">D6</text>
+<text x="130" y="406" fill="#495057">PB10</text>
+<text x="328" y="406" text-anchor="end" fill="#9c36b5">TIM2_CH3</text>
+<circle cx="340" cy="438" r="5" fill="#9c36b5"/>
+<text x="56" y="442" font-weight="bold" fill="#212529">D9</text>
+<text x="130" y="442" fill="#495057">PC7</text>
+<text x="328" y="442" text-anchor="end" fill="#9c36b5">TIM3_CH2</text>
+<circle cx="340" cy="474" r="5" fill="#2f9e44"/>
+<text x="56" y="478" font-weight="bold" fill="#212529">D11</text>
+<text x="130" y="478" fill="#495057">PA7</text>
+<text x="328" y="478" text-anchor="end" fill="#2f9e44">LED green</text>
+<circle cx="340" cy="510" r="5" fill="#2f9e44"/>
+<text x="56" y="514" font-weight="bold" fill="#212529">D12</text>
+<text x="130" y="514" fill="#495057">PA6</text>
+<text x="328" y="514" text-anchor="end" fill="#2f9e44">LED red</text>
+<circle cx="340" cy="546" r="5" fill="#2f9e44"/>
+<text x="56" y="550" font-weight="bold" fill="#212529">A4</text>
+<text x="130" y="550" fill="#495057">PC1</text>
+<text x="328" y="550" text-anchor="end" fill="#2f9e44">exit button</text>
+<circle cx="340" cy="582" r="5" fill="#2f9e44"/>
+<text x="56" y="586" font-weight="bold" fill="#212529">A5</text>
+<text x="130" y="586" fill="#495057">PC0</text>
+<text x="328" y="586" text-anchor="end" fill="#2f9e44">door contact</text>
+<circle cx="340" cy="618" r="5" fill="#495057"/>
+<text x="56" y="622" font-weight="bold" fill="#212529">A0-A3</text>
+<text x="130" y="622" fill="#495057">PA0,1,4 PB0</text>
+<text x="328" y="622" text-anchor="end" fill="#495057">rows</text>
+<circle cx="340" cy="654" r="5" fill="#495057"/>
+<text x="56" y="658" font-weight="bold" fill="#212529">CN7 1-4</text>
+<text x="130" y="658" fill="#495057">PC10-12 PD2</text>
+<text x="328" y="658" text-anchor="end" fill="#495057">columns</text>
+<circle cx="340" cy="690" r="5" fill="#0c8599"/>
+<text x="56" y="694" font-weight="bold" fill="#212529">D8, D2</text>
+<text x="130" y="694" fill="#495057">PA9, PA10</text>
+<text x="328" y="694" text-anchor="end" fill="#0c8599">USART1</text>
+<rect x="600" y="70" width="340" height="150" rx="8" fill="#fff4e6" stroke="#343a40" stroke-width="1.5"/>
+<text x="614" y="92" font-weight="bold" fill="#212529">MFRC522 RFID reader</text>
+<text x="614" y="110" fill="#495057">RC522 module, 3.3 V, SPI mode 0, 5.6 MHz</text>
+<line x1="560" y1="252" x2="560" y2="394" stroke="#1c7ed6" stroke-width="3"/>
+<line x1="570" y1="252" x2="570" y2="394" stroke="#1c7ed6" stroke-width="3"/>
+<rect x="600" y="232" width="340" height="52" rx="8" fill="#e7f5ff" stroke="#1c7ed6" stroke-width="1.5"/>
+<text x="614" y="254" font-weight="bold" fill="#212529">SSD1306 OLED 128x64</text>
+<text x="614" y="272" fill="#495057">I2C address 0x3C, 3.3 V</text>
+<line x1="560" y1="258" x2="600" y2="258" stroke="#1c7ed6" stroke-width="1.5"/>
+<line x1="570" y1="266" x2="600" y2="266" stroke="#1c7ed6" stroke-width="1.5"/>
+<rect x="600" y="296" width="340" height="52" rx="8" fill="#e7f5ff" stroke="#1c7ed6" stroke-width="1.5"/>
+<text x="614" y="318" font-weight="bold" fill="#212529">DS3231 RTC + CR2032</text>
+<text x="614" y="336" fill="#495057">I2C address 0x68, 3.3 V</text>
+<line x1="560" y1="322" x2="600" y2="322" stroke="#1c7ed6" stroke-width="1.5"/>
+<line x1="570" y1="330" x2="600" y2="330" stroke="#1c7ed6" stroke-width="1.5"/>
+<rect x="600" y="360" width="340" height="52" rx="8" fill="#e7f5ff" stroke="#1c7ed6" stroke-width="1.5"/>
+<text x="614" y="382" font-weight="bold" fill="#212529">24LC256 EEPROM, 32 KB</text>
+<text x="614" y="400" fill="#495057">I2C address 0x50, 3.3 V</text>
+<line x1="560" y1="386" x2="600" y2="386" stroke="#1c7ed6" stroke-width="1.5"/>
+<line x1="570" y1="394" x2="600" y2="394" stroke="#1c7ed6" stroke-width="1.5"/>
+<text x="600" y="432" fill="#1c7ed6">SCL and SDA: 4.7 k pull-ups to 3.3 V</text>
+<rect x="600" y="458" width="340" height="52" rx="8" fill="#f8f9fa" stroke="#343a40" stroke-width="1.5"/>
+<text x="614" y="480" font-weight="bold" fill="#212529">SG90 servo: the lock</text>
+<text x="614" y="498" fill="#495057">5 V from the NUCLEO's 5V pin</text>
+<rect x="600" y="522" width="340" height="52" rx="8" fill="#f8f9fa" stroke="#343a40" stroke-width="1.5"/>
+<text x="614" y="544" font-weight="bold" fill="#212529">Passive buzzer</text>
+<text x="614" y="562" fill="#495057">square wave at the tone's pitch</text>
+<rect x="600" y="586" width="340" height="90" rx="8" fill="#f8f9fa" stroke="#343a40" stroke-width="1.5"/>
+<text x="614" y="608" font-weight="bold" fill="#212529">Green and red LEDs</text>
+<text x="614" y="626" fill="#495057">to GND through 330 R</text>
+<rect x="600" y="688" width="340" height="90" rx="8" fill="#f8f9fa" stroke="#343a40" stroke-width="1.5"/>
+<text x="614" y="710" font-weight="bold" fill="#212529">Exit button, door reed</text>
+<text x="614" y="728" fill="#495057">to GND, internal pull-ups</text>
+<rect x="600" y="790" width="340" height="90" rx="8" fill="#f8f9fa" stroke="#343a40" stroke-width="1.5"/>
+<text x="614" y="812" font-weight="bold" fill="#212529">4x4 membrane keypad</text>
+<text x="614" y="830" fill="#495057">rows open-drain, columns pulled up</text>
+<rect x="600" y="892" width="340" height="52" rx="8" fill="#f8f9fa" stroke="#343a40" stroke-width="1.5"/>
+<text x="614" y="914" font-weight="bold" fill="#212529">ESP32-C3 DevKitM-1</text>
+<text x="614" y="932" fill="#495057">Wi-Fi gateway (planned)</text>
+<path d="M340 150 C460 150 480 128 600 128" fill="none" stroke="#e8590c" stroke-width="2"/>
+<circle cx="600" cy="128" r="4" fill="#e8590c"/>
+<text x="614" y="132" fill="#e8590c">SCK</text>
+<path d="M340 186 C460 186 480 148 600 148" fill="none" stroke="#e8590c" stroke-width="2"/>
+<circle cx="600" cy="148" r="4" fill="#e8590c"/>
+<text x="614" y="152" fill="#e8590c">MISO</text>
+<path d="M340 222 C460 222 480 168 600 168" fill="none" stroke="#e8590c" stroke-width="2"/>
+<circle cx="600" cy="168" r="4" fill="#e8590c"/>
+<text x="614" y="172" fill="#e8590c">MOSI</text>
+<path d="M340 258 C460 258 480 188 600 188" fill="none" stroke="#e8590c" stroke-width="2"/>
+<circle cx="600" cy="188" r="4" fill="#e8590c"/>
+<text x="614" y="192" fill="#e8590c">SDA (NSS)</text>
+<path d="M340 294 C460 294 480 208 600 208" fill="none" stroke="#e8590c" stroke-width="2"/>
+<circle cx="600" cy="208" r="4" fill="#e8590c"/>
+<text x="614" y="212" fill="#e8590c">RST</text>
+<path d="M340 330 H530 Q560 330 560 330" fill="none" stroke="#1c7ed6" stroke-width="2"/>
+<path d="M340 366 H540 Q570 366 570 366" fill="none" stroke="#1c7ed6" stroke-width="2"/>
+<path d="M340 402 C460 402 480 484 600 484" fill="none" stroke="#9c36b5" stroke-width="2"/>
+<circle cx="600" cy="484" r="4" fill="#9c36b5"/>
+<path d="M340 438 C460 438 480 548 600 548" fill="none" stroke="#9c36b5" stroke-width="2"/>
+<circle cx="600" cy="548" r="4" fill="#9c36b5"/>
+<path d="M340 474 C460 474 480 644 600 644" fill="none" stroke="#2f9e44" stroke-width="2"/>
+<circle cx="600" cy="644" r="4" fill="#2f9e44"/>
+<text x="614" y="648" fill="#2f9e44">green (330 R)</text>
+<path d="M340 510 C460 510 480 664 600 664" fill="none" stroke="#2f9e44" stroke-width="2"/>
+<circle cx="600" cy="664" r="4" fill="#2f9e44"/>
+<text x="614" y="668" fill="#2f9e44">red (330 R)</text>
+<path d="M340 546 C460 546 480 746 600 746" fill="none" stroke="#2f9e44" stroke-width="2"/>
+<circle cx="600" cy="746" r="4" fill="#2f9e44"/>
+<text x="614" y="750" fill="#2f9e44">exit button</text>
+<path d="M340 582 C460 582 480 766 600 766" fill="none" stroke="#2f9e44" stroke-width="2"/>
+<circle cx="600" cy="766" r="4" fill="#2f9e44"/>
+<text x="614" y="770" fill="#2f9e44">reed contact</text>
+<path d="M340 618 C460 618 480 848 600 848" fill="none" stroke="#495057" stroke-width="2"/>
+<circle cx="600" cy="848" r="4" fill="#495057"/>
+<text x="614" y="852" fill="#495057">R1-R4</text>
+<path d="M340 654 C460 654 480 868 600 868" fill="none" stroke="#495057" stroke-width="2"/>
+<circle cx="600" cy="868" r="4" fill="#495057"/>
+<text x="614" y="872" fill="#495057">C1-C4</text>
+<path d="M340 690 C460 690 480 918 600 918" fill="none" stroke="#0c8599" stroke-width="2" stroke-dasharray="6 5"/>
+<circle cx="600" cy="918" r="4" fill="#0c8599"/>
+<text x="56" y="730" fill="#c92a2a" font-weight="bold">3V3, 5V, GND to every module</text>
+<text x="56" y="750" fill="#495057">Console: USART2, ST-LINK USB</text>
+<rect x="40" y="982" width="22" height="6" rx="3" fill="#e8590c"/>
+<text x="68" y="989" fill="#495057" font-size="12">SPI1</text>
+<rect x="190" y="982" width="22" height="6" rx="3" fill="#1c7ed6"/>
+<text x="218" y="989" fill="#495057" font-size="12">I2C1, 400 kHz</text>
+<rect x="340" y="982" width="22" height="6" rx="3" fill="#9c36b5"/>
+<text x="368" y="989" fill="#495057" font-size="12">Timer PWM</text>
+<rect x="490" y="982" width="22" height="6" rx="3" fill="#2f9e44"/>
+<text x="518" y="989" fill="#495057" font-size="12">GPIO</text>
+<rect x="640" y="982" width="22" height="6" rx="3" fill="#495057"/>
+<text x="668" y="989" fill="#495057" font-size="12">Keypad matrix</text>
+<rect x="790" y="982" width="22" height="6" rx="3" fill="#0c8599"/>
+<text x="818" y="989" fill="#495057" font-size="12">USART1, planned</text>
+</svg>

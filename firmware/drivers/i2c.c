@@ -1,6 +1,6 @@
 /*
  * The STM32F4's I2C (v1) in master mode, from its event and error
- * interrupts, after RM0390 section 24.3.3.
+ * interrupts, after the master mode procedures of RM0390's I2C chapter.
  *
  * Receiving is the delicate part: the NACK and the STOP must be set before
  * the last byte is clocked in, so the ending depends on the length:

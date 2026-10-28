@@ -3,7 +3,6 @@
  */
 #include "mfrc522.h"
 #include "board.h"
-#include "fmt.h"
 #include "spi.h"
 #include "system.h"
 #include "FreeRTOS.h"
@@ -226,12 +225,4 @@ int mfrc522_read_uid(struct card_uid *uid)
     if (crc_a(hlta, 2, &hlta[2]) == MFRC522_OK)
         transceive(hlta, 4, 0, buf, sizeof buf, NULL);
     return MFRC522_OK;
-}
-
-void card_uid_format(const struct card_uid *uid, char *buf, unsigned size)
-{
-    unsigned pos = 0;
-    buf[0] = '\0';
-    for (unsigned i = 0; i < uid->len && pos + 3 < size; i++)
-        pos += (unsigned)fmt_snprintf(buf + pos, size - pos, i ? ":%02X" : "%02X", uid->bytes[i]);
 }

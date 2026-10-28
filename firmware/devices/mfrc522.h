@@ -7,13 +7,7 @@
 #define MFRC522_H
 
 #include <stdint.h>
-
-#define CARD_UID_MAX 10
-
-struct card_uid {
-    uint8_t len;                    /* 4 (single size), 7 or 10 */
-    uint8_t bytes[CARD_UID_MAX];
-};
+#include "card.h"
 
 enum {
     MFRC522_OK = 0,
@@ -28,7 +22,5 @@ enum {
 int mfrc522_init(void);
 /* WUPA, anticollision, SELECT, HLTA: a card in the field, halted or not */
 int mfrc522_read_uid(struct card_uid *uid);
-/* "04:A1:B2:C3" */
-void card_uid_format(const struct card_uid *uid, char *buf, unsigned size);
 
 #endif

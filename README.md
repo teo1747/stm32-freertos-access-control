@@ -103,7 +103,7 @@ third_party/  FreeRTOS kernel, CMSIS, ST's device header (with their licenses)
 
 - [x] Clock tree at 180 MHz, fault record, console, admin shell (passing in EmbSIM)
 - [x] Screens and the portable library (host unit tests)
-- [ ] I2C bus with the DS3231, 24LC256 and SSD1306: written, being verified in EmbSIM
+- [x] I2C bus with the DS3231, 24LC256 and SSD1306 (passing in EmbSIM)
 - [ ] SPI with the MFRC522, keypad, PWM, watchdog: written, not yet verified
 - [ ] Access logic, user database and access log in EEPROM
 - [ ] Full EmbSIM scenario suite

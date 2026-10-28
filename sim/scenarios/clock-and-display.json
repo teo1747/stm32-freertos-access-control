@@ -52,6 +52,15 @@
       }
     },
     {
+      "id": "temperature",
+      "by": "1.5s",
+      "probe": "console",
+      "doc": "The DS3231's 2-byte temperature read (the repeated-START race read it as 17.0)",
+      "expect": {
+        "contains": "25.0 C"
+      }
+    },
+    {
       "id": "oled-on",
       "at": "1s",
       "probe": "oled_on",

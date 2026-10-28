@@ -436,17 +436,17 @@
     },
     {
       "id": "oled_on",
-      "target": "out:OLED.on",
+      "target": "output:OLED.on",
       "kind": "value"
     },
     {
       "id": "oled_lit",
-      "target": "out:OLED.lit_pixels",
+      "target": "output:OLED.lit_pixels",
       "kind": "value"
     },
     {
       "id": "rtc_time",
-      "target": "out:RTC.time",
+      "target": "output:RTC.time",
       "kind": "value"
     }
   ],

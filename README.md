@@ -109,3 +109,9 @@ third_party/  FreeRTOS kernel, CMSIS, ST's device header (with their licenses)
 - [ ] Full EmbSIM scenario suite
 - [ ] Wiring diagram, screenshots, parts list
 - [ ] ESP32-C3 Wi-Fi gateway for the access log
+
+## License
+
+MIT, see [LICENSE](LICENSE). The files in [`third_party`](third_party) keep
+their own licenses: the FreeRTOS kernel is MIT, CMSIS and ST's device
+header are Apache-2.0.

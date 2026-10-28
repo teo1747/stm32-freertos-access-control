@@ -15,7 +15,10 @@
 #define configMAX_TASK_NAME_LEN                 12
 #define configTICK_TYPE_WIDTH_IN_BITS           TICK_TYPE_WIDTH_32_BITS
 #define configIDLE_SHOULD_YIELD                 1
-#define configTASK_NOTIFICATION_ARRAY_ENTRIES   1
+/* Index 0 is the tasks' own (and the stream buffers'); drivers that sleep
+ * on an interrupt use NOTIFY_DRIVER, so neither eats the other's */
+#define configTASK_NOTIFICATION_ARRAY_ENTRIES   2
+#define NOTIFY_DRIVER                           1
 #define configQUEUE_REGISTRY_SIZE               0
 #define configENABLE_BACKWARD_COMPATIBILITY     0
 #define configNUM_THREAD_LOCAL_STORAGE_POINTERS 0

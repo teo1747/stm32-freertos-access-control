@@ -29,6 +29,12 @@ int i2c_probe(uint8_t addr);
 
 struct i2c_stats {
     uint32_t transfers, nacks, bus_errors, timeouts, recoveries;
+    /* The last transfer that timed out or hit a bus error: what it was
+     * doing and where the peripheral stood */
+    uint8_t last_addr;
+    uint8_t last_phase;         /* 0 writing, 1 restarting, 2 reading */
+    uint16_t last_sr1, last_sr2, last_cr1;
+    uint32_t last_left;         /* bytes still to write and read */
 };
 void i2c_get_stats(struct i2c_stats *s);
 const char *i2c_strerror(int err);

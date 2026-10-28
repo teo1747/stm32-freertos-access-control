@@ -111,7 +111,7 @@ static void finish_from_isr(int result)
     I2C1->CR2 &= ~(I2C_CR2_ITEVTEN | I2C_CR2_ITBUFEN | I2C_CR2_ITERREN);
     I2C1->CR1 &= ~I2C_CR1_POS;
     x.result = result;
-    vTaskNotifyGiveFromISR(x.waiter, &woken);
+    vTaskNotifyGiveIndexedFromISR(x.waiter, NOTIFY_DRIVER, &woken);
     portYIELD_FROM_ISR(woken);
 }
 
@@ -282,7 +282,8 @@ static int transfer(uint8_t addr, const void *hdr, size_t hdr_len, const void *d
     x.phase = (hdr_len + len == 0 && rx_len) ? READING : WRITING;
     x.result = I2C_TIMEOUT;
     x.waiter = xTaskGetCurrentTaskHandle();
-    xTaskNotifyStateClear(NULL);
+    /* A late give from a transfer that timed out must not end this one */
+    ulTaskNotifyValueClearIndexed(NULL, NOTIFY_DRIVER, ~0u);
 
     I2C1->CR1 |= I2C_CR1_ACK;
     I2C1->CR2 |= I2C_CR2_ITEVTEN | I2C_CR2_ITERREN;
@@ -291,7 +292,7 @@ static int transfer(uint8_t addr, const void *hdr, size_t hdr_len, const void *d
     /* 400 kHz: 23 us a byte; allow ten times that, and 20 ms at least */
     uint32_t ms = 20u + (uint32_t)(hdr_len + len + rx_len) / 4u;
     int result;
-    if (ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(ms))) {
+    if (ulTaskNotifyTakeIndexed(NOTIFY_DRIVER, pdTRUE, pdMS_TO_TICKS(ms))) {
         result = x.result;
     } else {
         I2C1->CR2 &= ~(I2C_CR2_ITEVTEN | I2C_CR2_ITBUFEN | I2C_CR2_ITERREN);
@@ -302,6 +303,12 @@ static int transfer(uint8_t addr, const void *hdr, size_t hdr_len, const void *d
     if (result == I2C_NACK)
         stats.nacks++;
     if (result == I2C_BUS_ERROR || result == I2C_TIMEOUT) {
+        stats.last_addr = addr;
+        stats.last_phase = (uint8_t)x.phase;
+        stats.last_sr1 = (uint16_t)I2C1->SR1;
+        stats.last_sr2 = (uint16_t)I2C1->SR2;
+        stats.last_cr1 = (uint16_t)I2C1->CR1;
+        stats.last_left = (uint32_t)(tx_left() + x.rx_len - x.rx_pos);
         if (result == I2C_BUS_ERROR)
             stats.bus_errors++;
         else

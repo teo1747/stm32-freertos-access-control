@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "kind": "scenario",
+  "name": "boot",
+  "until": "2.5s",
+  "description": "The banner with the clock from the HSE and a power-on reset, LD2 blinking at 1 Hz from the heartbeat task, and the admin shell answering status.",
+  "inputs": [
+    {
+      "at": "1.2s",
+      "target": "B1",
+      "input": "serial",
+      "value": "status\r"
+    }
+  ],
+  "assertions": [
+    {
+      "id": "banner",
+      "by": "50ms",
+      "probe": "console",
+      "expect": {
+        "contains": "STM32F446RE at 180 MHz (HSE), reset: power-on"
+      }
+    },
+    {
+      "id": "prompt",
+      "by": "100ms",
+      "probe": "console",
+      "expect": {
+        "contains": "> "
+      }
+    },
+    {
+      "id": "heartbeat",
+      "between": [
+        "100ms",
+        "2.1s"
+      ],
+      "probe": "heartbeat",
+      "expect": {
+        "edges": 4
+      }
+    },
+    {
+      "id": "status",
+      "by": "1.4s",
+      "probe": "console",
+      "expect": {
+        "contains": "clock      180 MHz"
+      }
+    },
+    {
+      "id": "no-fault",
+      "at": "2.5s",
+      "probe": "console",
+      "expect": {
+        "not_contains": "last fault"
+      }
+    },
+    {
+      "id": "clean",
+      "always": true,
+      "doc": "No access to a peripheral whose clock is off, no clock or flash setting outside the datasheet",
+      "diagnostics": {
+        "forbid": [
+          "mcu.clock_gated",
+          "mcu.clock_out_of_spec",
+          "mcu.flash_wait_states"
+        ]
+      }
+    }
+  ]
+}

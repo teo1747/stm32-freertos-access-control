@@ -1,0 +1,457 @@
+{
+  "schema_version": 1,
+  "kind": "project",
+  "name": "stm32-access-terminal",
+  "description": "The access control terminal on a NUCLEO-F446RE: an MFRC522 card reader on SPI1, a 4x4 keypad, an SSD1306 OLED, a DS3231 clock and a 24LC256 EEPROM on I2C1, a servo lock on TIM2_CH3, a passive buzzer on TIM3_CH2, green and red LEDs, an exit button and the door's contact. The firmware is the CMake build's ELF (cmake --preset firmware && cmake --build --preset firmware).",
+  "policy": "electrical",
+  "boards": [
+    {
+      "id": "B1",
+      "board": "emblink/nucleo_f446re",
+      "layout": {
+        "x": 360,
+        "y": 120
+      },
+      "firmware": {
+        "image": "../build/firmware/access-terminal.elf",
+        "format": "elf"
+      }
+    }
+  ],
+  "components": [
+    {
+      "id": "USB",
+      "component": "emblink/vsource",
+      "layout": {
+        "x": 40,
+        "y": 160
+      },
+      "params": {
+        "kind": "dc",
+        "dc": 5
+      }
+    },
+    {
+      "id": "GND1",
+      "component": "emblink/gnd",
+      "layout": {
+        "x": 40,
+        "y": 360
+      }
+    },
+    {
+      "id": "RFID",
+      "component": "emblink/mfrc522",
+      "layout": {
+        "x": 820,
+        "y": 60
+      },
+      "params": {
+        "card_uid": "04 A1 B2 C3"
+      }
+    },
+    {
+      "id": "OLED",
+      "component": "emblink/ssd1306",
+      "layout": {
+        "x": 820,
+        "y": 260
+      }
+    },
+    {
+      "id": "RTC",
+      "component": "emblink/ds3231",
+      "layout": {
+        "x": 820,
+        "y": 400
+      }
+    },
+    {
+      "id": "EEPROM",
+      "component": "emblink/eeprom_24lc256",
+      "layout": {
+        "x": 820,
+        "y": 560
+      }
+    },
+    {
+      "id": "RSDA",
+      "component": "emblink/resistor",
+      "layout": {
+        "x": 700,
+        "y": 300
+      },
+      "params": {
+        "resistance": 4700
+      }
+    },
+    {
+      "id": "RSCL",
+      "component": "emblink/resistor",
+      "layout": {
+        "x": 700,
+        "y": 340
+      },
+      "params": {
+        "resistance": 4700
+      }
+    },
+    {
+      "id": "KEYPAD",
+      "component": "emblink/keypad_4x4",
+      "layout": {
+        "x": 60,
+        "y": 520
+      }
+    },
+    {
+      "id": "SERVO",
+      "component": "emblink/servo",
+      "layout": {
+        "x": 1040,
+        "y": 120
+      },
+      "params": {
+        "initial": 0
+      }
+    },
+    {
+      "id": "BUZZER",
+      "component": "emblink/buzzer",
+      "layout": {
+        "x": 1040,
+        "y": 300
+      },
+      "params": {
+        "kind": "passive"
+      }
+    },
+    {
+      "id": "RG",
+      "component": "emblink/resistor",
+      "layout": {
+        "x": 1040,
+        "y": 420
+      },
+      "params": {
+        "resistance": 330
+      }
+    },
+    {
+      "id": "LED_G",
+      "component": "emblink/led",
+      "layout": {
+        "x": 1120,
+        "y": 420
+      },
+      "params": {
+        "color": "green"
+      }
+    },
+    {
+      "id": "RR",
+      "component": "emblink/resistor",
+      "layout": {
+        "x": 1040,
+        "y": 480
+      },
+      "params": {
+        "resistance": 330
+      }
+    },
+    {
+      "id": "LED_R",
+      "component": "emblink/led",
+      "layout": {
+        "x": 1120,
+        "y": 480
+      },
+      "params": {
+        "color": "red"
+      }
+    },
+    {
+      "id": "EXIT",
+      "component": "emblink/push_button",
+      "layout": {
+        "x": 1040,
+        "y": 560
+      }
+    },
+    {
+      "id": "DOOR",
+      "component": "emblink/toggle_switch",
+      "layout": {
+        "x": 1040,
+        "y": 620
+      },
+      "params": {
+        "initially_closed": true
+      }
+    },
+    {
+      "id": "BAT",
+      "component": "emblink/battery",
+      "layout": {
+        "x": 940,
+        "y": 440
+      }
+    },
+    {
+      "id": "R32K",
+      "component": "emblink/resistor",
+      "layout": {
+        "x": 940,
+        "y": 380
+      },
+      "params": {
+        "resistance": 10000
+      }
+    },
+    {
+      "id": "RSQW",
+      "component": "emblink/resistor",
+      "layout": {
+        "x": 940,
+        "y": 400
+      },
+      "params": {
+        "resistance": 10000
+      }
+    },
+    {
+      "id": "RRST",
+      "component": "emblink/resistor",
+      "layout": {
+        "x": 940,
+        "y": 420
+      },
+      "params": {
+        "resistance": 10000
+      }
+    },
+    {
+      "id": "RIRQ",
+      "component": "emblink/resistor",
+      "layout": {
+        "x": 940,
+        "y": 100
+      },
+      "params": {
+        "resistance": 10000
+      }
+    }
+  ],
+  "nets": {
+    "USB5V": [
+      "USB.+",
+      "B1.U5V"
+    ],
+    "GND": [
+      "USB.-",
+      "GND1.GND",
+      "B1.GND",
+      "RFID.GND",
+      "OLED.GND",
+      "RTC.GND",
+      "EEPROM.GND",
+      "EEPROM.A0",
+      "EEPROM.A1",
+      "EEPROM.A2",
+      "EEPROM.WP",
+      "SERVO.GND",
+      "BUZZER.-",
+      "LED_G.K",
+      "LED_R.K",
+      "EXIT.2",
+      "DOOR.2",
+      "BAT.-"
+    ],
+    "V3V3": [
+      "B1.3V3",
+      "RFID.VCC",
+      "OLED.VCC",
+      "RTC.VCC",
+      "EEPROM.VCC",
+      "RSDA.1",
+      "RSCL.1",
+      "R32K.1",
+      "RSQW.1",
+      "RRST.1",
+      "RIRQ.1"
+    ],
+    "V5": [
+      "B1.5V",
+      "SERVO.V+"
+    ],
+    "SPI_SCK": [
+      "B1.D3",
+      "RFID.SCK"
+    ],
+    "SPI_MISO": [
+      "B1.D5",
+      "RFID.MISO"
+    ],
+    "SPI_MOSI": [
+      "B1.D4",
+      "RFID.MOSI"
+    ],
+    "RFID_CS": [
+      "B1.D10",
+      "RFID.SDA"
+    ],
+    "RFID_RST": [
+      "B1.D7",
+      "RFID.RST"
+    ],
+    "I2C_SCL": [
+      "B1.D15",
+      "OLED.SCL",
+      "RTC.SCL",
+      "EEPROM.SCL",
+      "RSCL.2"
+    ],
+    "I2C_SDA": [
+      "B1.D14",
+      "OLED.SDA",
+      "RTC.SDA",
+      "EEPROM.SDA",
+      "RSDA.2"
+    ],
+    "SERVO": [
+      "B1.D6",
+      "SERVO.SIG"
+    ],
+    "BUZZER": [
+      "B1.D9",
+      "BUZZER.+"
+    ],
+    "LED_G_R": [
+      "B1.D11",
+      "RG.1"
+    ],
+    "LED_G_A": [
+      "RG.2",
+      "LED_G.A"
+    ],
+    "LED_R_R": [
+      "B1.D12",
+      "RR.1"
+    ],
+    "LED_R_A": [
+      "RR.2",
+      "LED_R.A"
+    ],
+    "EXIT": [
+      "B1.A4",
+      "EXIT.1"
+    ],
+    "DOOR": [
+      "B1.A5",
+      "DOOR.1"
+    ],
+    "KP_R1": [
+      "B1.A0",
+      "KEYPAD.R1"
+    ],
+    "KP_R2": [
+      "B1.A1",
+      "KEYPAD.R2"
+    ],
+    "KP_R3": [
+      "B1.A2",
+      "KEYPAD.R3"
+    ],
+    "KP_R4": [
+      "B1.A3",
+      "KEYPAD.R4"
+    ],
+    "KP_C1": [
+      "B1.CN7_1",
+      "KEYPAD.C1"
+    ],
+    "KP_C2": [
+      "B1.CN7_2",
+      "KEYPAD.C2"
+    ],
+    "KP_C3": [
+      "B1.CN7_3",
+      "KEYPAD.C3"
+    ],
+    "KP_C4": [
+      "B1.CN7_4",
+      "KEYPAD.C4"
+    ],
+    "RTC_VBAT": [
+      "RTC.VBAT",
+      "BAT.+"
+    ],
+    "RTC_32K": [
+      "RTC.32KHZ",
+      "R32K.2"
+    ],
+    "RTC_SQW": [
+      "RTC.INT_SQW",
+      "RSQW.2"
+    ],
+    "RTC_RST": [
+      "RTC.RST",
+      "RRST.2"
+    ],
+    "RFID_IRQ": [
+      "RFID.IRQ",
+      "RIRQ.2"
+    ]
+  },
+  "probes": [
+    {
+      "id": "console",
+      "target": "serial:B1",
+      "kind": "serial"
+    },
+    {
+      "id": "heartbeat",
+      "target": "net:B1.PA5",
+      "kind": "digital"
+    },
+    {
+      "id": "led_green",
+      "target": "net:B1.PA7",
+      "kind": "digital"
+    },
+    {
+      "id": "led_red",
+      "target": "net:B1.PA6",
+      "kind": "digital"
+    },
+    {
+      "id": "servo_pwm",
+      "target": "net:B1.PB10",
+      "kind": "digital"
+    },
+    {
+      "id": "buzzer",
+      "target": "net:B1.PC7",
+      "kind": "digital"
+    },
+    {
+      "id": "oled_on",
+      "target": "out:OLED.on",
+      "kind": "value"
+    },
+    {
+      "id": "oled_lit",
+      "target": "out:OLED.lit_pixels",
+      "kind": "value"
+    },
+    {
+      "id": "rtc_time",
+      "target": "out:RTC.time",
+      "kind": "value"
+    }
+  ],
+  "scenarios": [
+    "scenarios/boot.json",
+    "scenarios/clock-and-display.json"
+  ]
+}

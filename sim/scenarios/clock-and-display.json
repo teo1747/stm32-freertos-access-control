@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "kind": "scenario",
+  "name": "clock-and-display",
+  "until": "3s",
+  "description": "The I2C bus comes up with its three parts; the OLED shows the idle clock; the admin sets the time and reads it back with the DS3231's temperature.",
+  "inputs": [
+    {
+      "at": "0.6s",
+      "target": "B1",
+      "input": "serial",
+      "value": "i2c\r"
+    },
+    {
+      "at": "1.2s",
+      "target": "B1",
+      "input": "serial",
+      "value": "time set 2026-10-28 17:42:05\r"
+    }
+  ],
+  "assertions": [
+    {
+      "id": "rtc-lost-power",
+      "by": "300ms",
+      "probe": "console",
+      "expect": {
+        "contains": "lost power: set the time"
+      }
+    },
+    {
+      "id": "scan",
+      "by": "1.1s",
+      "probe": "console",
+      "expect": {
+        "contains": "3 device(s)"
+      }
+    },
+    {
+      "id": "eeprom",
+      "by": "1.1s",
+      "probe": "console",
+      "expect": {
+        "contains": "0x50  24LC256 EEPROM"
+      }
+    },
+    {
+      "id": "set",
+      "by": "1.5s",
+      "probe": "console",
+      "expect": {
+        "contains": "Wed 2026-10-28 17:42:05"
+      }
+    },
+    {
+      "id": "oled-on",
+      "at": "1s",
+      "probe": "oled_on",
+      "expect": {
+        "equals": true
+      }
+    },
+    {
+      "id": "oled-drawn",
+      "at": "2.9s",
+      "probe": "oled_lit",
+      "expect": {
+        "min": 300
+      }
+    },
+    {
+      "id": "rtc-runs",
+      "at": "2.9s",
+      "probe": "rtc_time",
+      "expect": {
+        "contains": "2026-10-28 17:42:0"
+      }
+    },
+    {
+      "id": "clean",
+      "always": true,
+      "diagnostics": {
+        "forbid": [
+          "mcu.clock_gated",
+          "mcu.clock_out_of_spec",
+          "mcu.flash_wait_states"
+        ]
+      }
+    }
+  ]
+}

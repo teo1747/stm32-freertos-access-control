@@ -3,7 +3,7 @@
   "kind": "scenario",
   "name": "boot",
   "until": "2.5s",
-  "description": "The banner with the clock from the HSE and a power-on reset, LD2 blinking at 1 Hz from the heartbeat task, and the admin shell answering status.",
+  "description": "The banner with the clock from the HSE and a power-on reset; the devices come up (storage formats the blank EEPROM); LD2 blinks at 1 Hz from the supervisor once every task checks in; the admin shell answers status.",
   "inputs": [
     {
       "at": "1.2s",
@@ -23,17 +23,41 @@
     },
     {
       "id": "prompt",
-      "by": "100ms",
+      "by": "400ms",
       "probe": "console",
       "expect": {
         "contains": "> "
       }
     },
     {
+      "id": "storage",
+      "by": "400ms",
+      "probe": "console",
+      "expect": {
+        "contains": "storage: blank EEPROM: formatted"
+      }
+    },
+    {
+      "id": "reader",
+      "by": "600ms",
+      "probe": "console",
+      "expect": {
+        "contains": "reader: MFRC522 v2.0"
+      }
+    },
+    {
+      "id": "no-i2c-error",
+      "at": "2.5s",
+      "probe": "console",
+      "expect": {
+        "not_contains": "no OLED"
+      }
+    },
+    {
       "id": "heartbeat",
       "between": [
-        "100ms",
-        "2.1s"
+        "300ms",
+        "2.5s"
       ],
       "probe": "heartbeat",
       "expect": {

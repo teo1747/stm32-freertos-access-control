@@ -12,7 +12,13 @@
       "value": "i2c\r"
     },
     {
-      "at": "1.2s",
+      "at": "0.9s",
+      "target": "B1",
+      "input": "serial",
+      "value": "login 1234\r"
+    },
+    {
+      "at": "1.3s",
       "target": "B1",
       "input": "serial",
       "value": "time set 2026-10-28 17:42:05\r"
@@ -45,7 +51,7 @@
     },
     {
       "id": "set",
-      "by": "1.5s",
+      "by": "1.7s",
       "probe": "console",
       "expect": {
         "contains": "Wed 2026-10-28 17:42:05"
@@ -53,7 +59,7 @@
     },
     {
       "id": "temperature",
-      "by": "1.5s",
+      "by": "1.7s",
       "probe": "console",
       "doc": "The DS3231's 2-byte temperature read (the repeated-START race read it as 17.0)",
       "expect": {

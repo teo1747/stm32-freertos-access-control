@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "kind": "scenario",
+  "name": "access-flow",
+  "until": "8s",
+  "description": "An unknown card is denied. The admin logs in and enrols the card by presenting it, with PIN 2468. Card and PIN open the door: servo to 90 degrees, green LED, 'ACCESS GRANTED' on the OLED. The door opens and closes, and the lock closes at once.",
+  "inputs": [
+    {
+      "at": "0.6s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": true
+    },
+    {
+      "at": "0.8s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": false
+    },
+    {
+      "at": "1.0s",
+      "target": "B1",
+      "input": "serial",
+      "value": "login 1234\r"
+    },
+    {
+      "at": "1.5s",
+      "target": "B1",
+      "input": "serial",
+      "value": "user add card \"Ada Lovelace\" 2468\r"
+    },
+    {
+      "at": "1.9s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": true
+    },
+    {
+      "at": "2.2s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": false
+    },
+    {
+      "at": "3.0s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": true
+    },
+    {
+      "at": "3.3s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": false
+    },
+    {
+      "at": "3.50s",
+      "target": "KEYPAD.k2",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "3.58s",
+      "target": "KEYPAD.k2",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "3.70s",
+      "target": "KEYPAD.k4",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "3.78s",
+      "target": "KEYPAD.k4",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "3.90s",
+      "target": "KEYPAD.k6",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "3.98s",
+      "target": "KEYPAD.k6",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "4.10s",
+      "target": "KEYPAD.k8",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "4.18s",
+      "target": "KEYPAD.k8",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "4.30s",
+      "target": "KEYPAD.khash",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "4.38s",
+      "target": "KEYPAD.khash",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "5.5s",
+      "target": "DOOR",
+      "input": "closed",
+      "value": false
+    },
+    {
+      "at": "6.5s",
+      "target": "DOOR",
+      "input": "closed",
+      "value": true
+    }
+  ],
+  "assertions": [
+    {
+      "id": "unknown",
+      "by": "1.0s",
+      "probe": "console",
+      "expect": {
+        "contains": "denied: unknown card 04:A1:B2:C3"
+      }
+    },
+    {
+      "id": "red-on-deny",
+      "at": "0.9s",
+      "probe": "red",
+      "expect": {
+        "equals": true
+      }
+    },
+    {
+      "id": "login",
+      "by": "1.4s",
+      "probe": "console",
+      "expect": {
+        "contains": "logged in"
+      }
+    },
+    {
+      "id": "enrolled",
+      "by": "2.6s",
+      "probe": "console",
+      "expect": {
+        "contains": "user 0: Ada Lovelace, card 04:A1:B2:C3, card+PIN"
+      }
+    },
+    {
+      "id": "locked-before",
+      "at": "4.0s",
+      "probe": "servo",
+      "expect": {
+        "max": 5
+      }
+    },
+    {
+      "id": "granted",
+      "by": "4.8s",
+      "probe": "console",
+      "expect": {
+        "contains": "granted (Ada Lovelace)"
+      }
+    },
+    {
+      "id": "unlocked",
+      "at": "5.0s",
+      "probe": "servo",
+      "expect": {
+        "min": 85,
+        "max": 95
+      }
+    },
+    {
+      "id": "green",
+      "at": "5.0s",
+      "probe": "green",
+      "expect": {
+        "equals": true
+      }
+    },
+    {
+      "id": "granted-screen",
+      "at": "5.0s",
+      "probe": "oled_lit",
+      "expect": {
+        "min": 3000
+      }
+    },
+    {
+      "id": "relocked",
+      "at": "7.0s",
+      "probe": "servo",
+      "expect": {
+        "max": 5
+      }
+    },
+    {
+      "id": "green-off",
+      "at": "7.0s",
+      "probe": "green",
+      "expect": {
+        "equals": false
+      }
+    },
+    {
+      "id": "no-alarm",
+      "by": "8s",
+      "probe": "console",
+      "expect": {
+        "not_contains": "ALARM"
+      }
+    },
+    {
+      "id": "clean",
+      "always": true,
+      "diagnostics": {
+        "forbid": [
+          "mcu.clock_gated",
+          "mcu.clock_out_of_spec",
+          "mcu.flash_wait_states"
+        ]
+      }
+    }
+  ]
+}

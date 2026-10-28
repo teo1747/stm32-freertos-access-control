@@ -81,7 +81,8 @@ NUCLEO-F446RE in EmbSIM. Each scenario in [`sim/scenarios`](sim/scenarios)
 drives inputs (cards, keys, serial text) and checks the outputs:
 
 ```sh
-embsim run sim/project.json --scenario sim/scenarios/boot.json
+embsim run sim/project.json --scenario sim/scenarios/access-flow.json
+tools/simtest.py            # every scenario, in parallel, with a summary
 ```
 
 ## Layout
@@ -104,9 +105,9 @@ third_party/  FreeRTOS kernel, CMSIS, ST's device header (with their licenses)
 - [x] Clock tree at 180 MHz, fault record, console, admin shell (passing in EmbSIM)
 - [x] Screens and the portable library (host unit tests)
 - [x] I2C bus with the DS3231, 24LC256 and SSD1306 (passing in EmbSIM)
-- [ ] SPI with the MFRC522, keypad, PWM, watchdog: written, not yet verified
-- [ ] Access logic, user database and access log in EEPROM
-- [ ] Full EmbSIM scenario suite
+- [x] SPI with the MFRC522, keypad, PWM, watchdog
+- [x] Access logic, user database and access log in EEPROM
+- [x] EmbSIM scenarios: boot, clock and display, access flow, alarms, lockout
 - [ ] Wiring diagram, screenshots, parts list
 - [ ] ESP32-C3 Wi-Fi gateway for the access log
 

@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "kind": "scenario",
+  "name": "alarms",
+  "until": "9s",
+  "description": "The door forced open while locked raises an alarm: buzzer, red LED, alarm screen, logged. Closing the door doesn't end it, and a card that isn't an admin's is refused. Once made an admin, the same card clears it and opens. The exit button opens the door from inside even while the alarm sounds.",
+  "inputs": [
+    {
+      "at": "0.6s",
+      "target": "B1",
+      "input": "serial",
+      "value": "login 1234\r"
+    },
+    {
+      "at": "1.0s",
+      "target": "B1",
+      "input": "serial",
+      "value": "user add 04A1B2C3 Alan\r"
+    },
+    {
+      "at": "1.5s",
+      "target": "DOOR",
+      "input": "closed",
+      "value": false
+    },
+    {
+      "at": "2.0s",
+      "target": "DOOR",
+      "input": "closed",
+      "value": true
+    },
+    {
+      "at": "2.5s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": true
+    },
+    {
+      "at": "2.8s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": false
+    },
+    {
+      "at": "3.2s",
+      "target": "B1",
+      "input": "serial",
+      "value": "user admin 0 on\r"
+    },
+    {
+      "at": "3.8s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": true
+    },
+    {
+      "at": "4.1s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": false
+    },
+    {
+      "at": "5.0s",
+      "target": "DOOR",
+      "input": "closed",
+      "value": false
+    },
+    {
+      "at": "5.5s",
+      "target": "DOOR",
+      "input": "closed",
+      "value": true
+    },
+    {
+      "at": "6.50s",
+      "target": "EXIT",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "6.58s",
+      "target": "EXIT",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "7.0s",
+      "target": "DOOR",
+      "input": "closed",
+      "value": false
+    },
+    {
+      "at": "7.5s",
+      "target": "DOOR",
+      "input": "closed",
+      "value": true
+    }
+  ],
+  "assertions": [
+    {
+      "id": "added",
+      "by": "1.4s",
+      "probe": "console",
+      "expect": {
+        "contains": "user 0: Alan, card 04:A1:B2:C3, card"
+      }
+    },
+    {
+      "id": "forced",
+      "by": "1.7s",
+      "probe": "console",
+      "expect": {
+        "contains": "ALARM: door forced"
+      }
+    },
+    {
+      "id": "siren",
+      "at": "1.8s",
+      "probe": "siren",
+      "expect": {
+        "equals": true
+      }
+    },
+    {
+      "id": "red",
+      "at": "1.8s",
+      "probe": "red",
+      "expect": {
+        "equals": true
+      }
+    },
+    {
+      "id": "still-alarm",
+      "at": "2.4s",
+      "probe": "siren",
+      "expect": {
+        "equals": true
+      }
+    },
+    {
+      "id": "admin-only",
+      "by": "3.0s",
+      "probe": "console",
+      "expect": {
+        "contains": "denied: alarm active (Alan)"
+      }
+    },
+    {
+      "id": "refused-locked",
+      "at": "3.0s",
+      "probe": "servo",
+      "expect": {
+        "max": 5
+      }
+    },
+    {
+      "id": "cleared",
+      "by": "4.5s",
+      "probe": "console",
+      "expect": {
+        "contains": "alarm cleared"
+      }
+    },
+    {
+      "id": "granted",
+      "by": "4.5s",
+      "probe": "console",
+      "expect": {
+        "contains": "granted (Alan)"
+      }
+    },
+    {
+      "id": "quiet",
+      "at": "4.8s",
+      "probe": "siren",
+      "expect": {
+        "equals": false
+      }
+    },
+    {
+      "id": "open",
+      "at": "4.8s",
+      "probe": "servo",
+      "expect": {
+        "min": 85
+      }
+    },
+    {
+      "id": "exit",
+      "by": "6.8s",
+      "probe": "console",
+      "expect": {
+        "contains": "exit button"
+      }
+    },
+    {
+      "id": "exit-open",
+      "at": "6.9s",
+      "probe": "servo",
+      "expect": {
+        "min": 85
+      }
+    },
+    {
+      "id": "closed-again",
+      "at": "8.5s",
+      "probe": "servo",
+      "expect": {
+        "max": 5
+      }
+    },
+    {
+      "id": "clean",
+      "always": true,
+      "diagnostics": {
+        "forbid": [
+          "mcu.clock_gated",
+          "mcu.clock_out_of_spec",
+          "mcu.flash_wait_states"
+        ]
+      }
+    }
+  ]
+}

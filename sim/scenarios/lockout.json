@@ -1,0 +1,404 @@
+{
+  "schema_version": 1,
+  "kind": "scenario",
+  "name": "lockout",
+  "until": "15s",
+  "description": "Three wrong PINs lock the keypad out (here for 5 s, set from the shell): logged, red LED, the lockout screen counting down; a card meanwhile is ignored. After it, the right PIN opens.",
+  "inputs": [
+    {
+      "at": "0.6s",
+      "target": "B1",
+      "input": "serial",
+      "value": "login 1234\r"
+    },
+    {
+      "at": "1.0s",
+      "target": "B1",
+      "input": "serial",
+      "value": "config lockout 5\r"
+    },
+    {
+      "at": "1.3s",
+      "target": "B1",
+      "input": "serial",
+      "value": "user add 04A1B2C3 Grace 1357\r"
+    },
+    {
+      "at": "2.0s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": true
+    },
+    {
+      "at": "2.2s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": false
+    },
+    {
+      "at": "2.40s",
+      "target": "KEYPAD.k1",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "2.48s",
+      "target": "KEYPAD.k1",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "2.60s",
+      "target": "KEYPAD.k1",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "2.68s",
+      "target": "KEYPAD.k1",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "2.80s",
+      "target": "KEYPAD.k1",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "2.88s",
+      "target": "KEYPAD.k1",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "3.00s",
+      "target": "KEYPAD.k1",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "3.08s",
+      "target": "KEYPAD.k1",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "3.20s",
+      "target": "KEYPAD.khash",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "3.28s",
+      "target": "KEYPAD.khash",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "3.8s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": true
+    },
+    {
+      "at": "4.0s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": false
+    },
+    {
+      "at": "4.20s",
+      "target": "KEYPAD.k2",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "4.28s",
+      "target": "KEYPAD.k2",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "4.40s",
+      "target": "KEYPAD.k2",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "4.48s",
+      "target": "KEYPAD.k2",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "4.60s",
+      "target": "KEYPAD.k2",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "4.68s",
+      "target": "KEYPAD.k2",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "4.80s",
+      "target": "KEYPAD.k2",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "4.88s",
+      "target": "KEYPAD.k2",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "5.00s",
+      "target": "KEYPAD.khash",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "5.08s",
+      "target": "KEYPAD.khash",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "5.6s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": true
+    },
+    {
+      "at": "5.8s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": false
+    },
+    {
+      "at": "6.00s",
+      "target": "KEYPAD.k3",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "6.08s",
+      "target": "KEYPAD.k3",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "6.20s",
+      "target": "KEYPAD.k3",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "6.28s",
+      "target": "KEYPAD.k3",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "6.40s",
+      "target": "KEYPAD.k3",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "6.48s",
+      "target": "KEYPAD.k3",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "6.60s",
+      "target": "KEYPAD.k3",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "6.68s",
+      "target": "KEYPAD.k3",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "6.80s",
+      "target": "KEYPAD.khash",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "6.88s",
+      "target": "KEYPAD.khash",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "7.6s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": true
+    },
+    {
+      "at": "7.8s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": false
+    },
+    {
+      "at": "12.3s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": true
+    },
+    {
+      "at": "12.5s",
+      "target": "RFID",
+      "input": "card_present",
+      "value": false
+    },
+    {
+      "at": "12.70s",
+      "target": "KEYPAD.k1",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "12.78s",
+      "target": "KEYPAD.k1",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "12.90s",
+      "target": "KEYPAD.k3",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "12.98s",
+      "target": "KEYPAD.k3",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "13.10s",
+      "target": "KEYPAD.k5",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "13.18s",
+      "target": "KEYPAD.k5",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "13.30s",
+      "target": "KEYPAD.k7",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "13.38s",
+      "target": "KEYPAD.k7",
+      "input": "pressed",
+      "value": false
+    },
+    {
+      "at": "13.50s",
+      "target": "KEYPAD.khash",
+      "input": "pressed",
+      "value": true
+    },
+    {
+      "at": "13.58s",
+      "target": "KEYPAD.khash",
+      "input": "pressed",
+      "value": false
+    }
+  ],
+  "assertions": [
+    {
+      "id": "added",
+      "by": "1.9s",
+      "probe": "console",
+      "expect": {
+        "contains": "user 0: Grace"
+      }
+    },
+    {
+      "id": "wrong",
+      "by": "3.6s",
+      "probe": "console",
+      "expect": {
+        "contains": "denied: wrong PIN (Grace)"
+      }
+    },
+    {
+      "id": "lockout",
+      "by": "7.4s",
+      "probe": "console",
+      "expect": {
+        "contains": "lockout (Grace)"
+      }
+    },
+    {
+      "id": "lockout-red",
+      "at": "7.5s",
+      "probe": "red",
+      "expect": {
+        "equals": true
+      }
+    },
+    {
+      "id": "still-locked-out",
+      "by": "11s",
+      "probe": "console",
+      "expect": {
+        "not_contains": "granted"
+      }
+    },
+    {
+      "id": "ignored",
+      "at": "8.2s",
+      "probe": "servo",
+      "expect": {
+        "max": 5
+      }
+    },
+    {
+      "id": "granted",
+      "by": "14.5s",
+      "probe": "console",
+      "expect": {
+        "contains": "granted (Grace)"
+      }
+    },
+    {
+      "id": "open",
+      "at": "14.5s",
+      "probe": "servo",
+      "expect": {
+        "min": 85
+      }
+    },
+    {
+      "id": "clean",
+      "always": true,
+      "diagnostics": {
+        "forbid": [
+          "mcu.clock_gated",
+          "mcu.clock_out_of_spec",
+          "mcu.flash_wait_states"
+        ]
+      }
+    }
+  ]
+}

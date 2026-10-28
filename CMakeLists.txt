@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.20)
+project(access_terminal VERSION 1.0.0 LANGUAGES C)
+
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# The same tree builds the firmware (cross) or the unit tests (host)
+if(CMAKE_CROSSCOMPILING)
+    add_subdirectory(firmware)
+else()
+    enable_testing()
+    add_subdirectory(tests)
+endif()

@@ -1,0 +1,11 @@
+{
+  "clangd.arguments": [
+    "--query-driver=**/arm-none-eabi-gcc*",
+    "--compile-commands-dir=${workspaceFolder}/build/firmware",
+    "--header-insertion=never"
+  ],
+  "cmake.useCMakePresets": "always",
+  "files.associations": {
+    "*.h": "c"
+  }
+}

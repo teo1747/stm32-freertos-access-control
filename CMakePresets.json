@@ -1,0 +1,35 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "firmware",
+      "displayName": "Firmware (arm-none-eabi-gcc)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/firmware",
+      "toolchainFile": "${sourceDir}/cmake/arm-none-eabi.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "MinSizeRel"
+      }
+    },
+    {
+      "name": "host",
+      "displayName": "Unit tests (host compiler, sanitizers)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/host",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    }
+  ],
+  "buildPresets": [
+    { "name": "firmware", "configurePreset": "firmware" },
+    { "name": "host", "configurePreset": "host" }
+  ],
+  "testPresets": [
+    {
+      "name": "host",
+      "configurePreset": "host",
+      "output": { "outputOnFailure": true }
+    }
+  ]
+}
